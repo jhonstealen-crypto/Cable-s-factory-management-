@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,65 +8,306 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f1f5f9;color:#172033}
-header{background:#14243d;color:white;padding:20px}
+
+body{
+margin:0;
+font-family:Arial;
+background:#f1f5f9;
+color:#172033
+}
+
+/* LOGIN PAGE */
+
+#loginPage{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#14243d,#1765ad);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+padding:20px;
+}
+
+.login-box{
+background:white;
+padding:35px;
+border-radius:12px;
+width:100%;
+max-width:380px;
+text-align:center;
+box-shadow:0 5px 25px #0003;
+}
+
+.login-box h2{color:#14243d}
+.login-box p{color:#64748b}
+
+.login-box input{
+width:100%;
+padding:13px;
+margin:8px 0 15px;
+border:1px solid #cbd5e1;
+border-radius:6px;
+font-size:15px;
+}
+
+.login-box label{
+display:block;
+text-align:left;
+font-weight:bold;
+font-size:13px;
+}
+
+.login-btn{
+width:100%;
+background:#1765ad;
+color:white;
+padding:13px;
+border:0;
+border-radius:6px;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+}
+
+#loginError{
+color:red;
+font-size:13px;
+}
+
+/* MAIN SYSTEM */
+
+header{
+background:#14243d;
+color:white;
+padding:20px
+}
+
 header h2{margin:0 0 7px}
 header p{margin:0;color:#bdc9dc}
-.layout{display:flex;min-height:90vh}
-aside{width:220px;background:#14243d;padding:15px;color:white}
+
+.layout{
+display:flex;
+min-height:90vh
+}
+
+aside{
+width:220px;
+background:#14243d;
+padding:15px;
+color:white
+}
+
 aside h3{color:#8eb8ff}
+
 nav button{
-display:block;width:100%;padding:13px;margin:5px 0;
-border:0;border-radius:6px;text-align:left;
-background:transparent;color:white;font-size:15px
+display:block;
+width:100%;
+padding:13px;
+margin:5px 0;
+border:0;
+border-radius:6px;
+text-align:left;
+background:transparent;
+color:white;
+font-size:15px;
+cursor:pointer
 }
-nav button.active,nav button:hover{background:#304b70}
-main{flex:1;padding:22px;min-width:0}
+
+nav button.active,
+nav button:hover{
+background:#304b70
+}
+
+main{
+flex:1;
+padding:22px;
+min-width:0
+}
+
 h1{font-size:25px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px}
-.card,.panel{
-background:white;padding:18px;border-radius:10px;
-box-shadow:0 2px 8px #0001;margin-bottom:16px
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+gap:14px
 }
+
+.card,.panel{
+background:white;
+padding:18px;
+border-radius:10px;
+box-shadow:0 2px 8px #0001;
+margin-bottom:16px
+}
+
 .card p{color:#718096;margin:8px 0}
-.card h2{font-size:28px;margin:10px 0;color:#1765ad}
+
+.card h2{
+font-size:28px;
+margin:10px 0;
+color:#1765ad
+}
+
 section{display:none}
 section.show{display:block}
+
 form{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:12px;margin-bottom:18px
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+margin-bottom:18px
 }
+
 input,select{
-width:100%;padding:12px;border:1px solid #cbd5e1;
-border-radius:6px;font-size:15px
+width:100%;
+padding:12px;
+border:1px solid #cbd5e1;
+border-radius:6px;
+font-size:15px
 }
-label{font-size:13px;font-weight:bold}
-.field{display:flex;flex-direction:column;gap:6px}
+
+label{
+font-size:13px;
+font-weight:bold
+}
+
+.field{
+display:flex;
+flex-direction:column;
+gap:6px
+}
+
 button.action{
-background:#1765ad;color:white;padding:12px 18px;
-border:0;border-radius:6px;font-weight:bold
+background:#1765ad;
+color:white;
+padding:12px 18px;
+border:0;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer
 }
+
 button.delete{
-background:#dc3545;color:white;border:0;
-border-radius:5px;padding:7px 10px
+background:#dc3545;
+color:white;
+border:0;
+border-radius:5px;
+padding:7px 10px;
+cursor:pointer
 }
+
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;background:white;min-width:550px}
-th,td{text-align:left;padding:12px;border-bottom:1px solid #e2e8f0}
-th{background:#eaf1fa;color:#28466b}
-.small{font-size:13px;color:#64748b}
-.warning{color:#dc3545;font-weight:bold}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+min-width:550px
+}
+
+th,td{
+text-align:left;
+padding:12px;
+border-bottom:1px solid #e2e8f0
+}
+
+th{
+background:#eaf1fa;
+color:#28466b
+}
+
+.small{
+font-size:13px;
+color:#64748b
+}
+
+.warning{
+color:#dc3545;
+font-weight:bold
+}
+
+.logout-btn{
+background:#dc3545;
+color:white;
+border:0;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+margin-top:15px;
+width:100%;
+font-weight:bold;
+}
+
 @media(max-width:650px){
+
 .layout{display:block}
-aside{width:100%;padding:10px}
-nav{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
-nav button{font-size:13px;padding:10px}
+
+aside{
+width:100%;
+padding:10px
+}
+
+nav{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:3px
+}
+
+nav button{
+font-size:13px;
+padding:10px
+}
+
 main{padding:13px}
 }
 </style>
 </head>
 
 <body>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage">
+
+<div class="login-box">
+
+<h2>🏭 CABLE FACTORY</h2>
+
+<p>Management System Login</p>
+
+<form onsubmit="login(event)" style="display:block">
+
+<label>USERNAME</label>
+
+<input
+id="username"
+type="text"
+placeholder="Enter Username"
+required
+>
+
+<label>PASSWORD</label>
+
+<input
+id="password"
+type="password"
+placeholder="Enter Password"
+required
+>
+
+<button type="submit" class="login-btn">
+LOGIN
+</button>
+
+<p id="loginError"></p>
+
+</form>
+
+</div>
+</div>
+
+<!-- HEADER -->
 
 <header>
 <h2>🏭 Cable Factory Management</h2>
@@ -74,144 +316,429 @@ main{padding:13px}
 
 <div class="layout">
 
+<!-- SIDEBAR -->
+
 <aside>
+
 <h3>MAIN MENU</h3>
+
 <nav id="menu">
+
 <button class="active" onclick="showPage('dashboard',this)">📊 Dashboard</button>
+
 <button onclick="showPage('employees',this)">👨‍🏭 Employees</button>
+
 <button onclick="showPage('cables',this)">🔌 Cable Products</button>
+
 <button onclick="showPage('stock',this)">📦 Stock</button>
+
 <button onclick="showPage('production',this)">⚙️ Production</button>
+
 <button onclick="showPage('customers',this)">👥 Customers</button>
+
 <button onclick="showPage('orders',this)">📝 Orders</button>
+
 </nav>
+
+<button class="logout-btn" onclick="logout()">🚪 LOGOUT</button>
+
 </aside>
 
 <main>
 
+<!-- DASHBOARD -->
+
 <section id="dashboard" class="show">
+
 <h1>Dashboard</h1>
+
 <p class="small">Welcome to Cable Factory Management System</p>
 
 <div class="cards">
-<div class="card"><p>Total Employees</p><h2 id="countEmployees">0</h2></div>
-<div class="card"><p>Cable Products</p><h2 id="countCables">0</h2></div>
-<div class="card"><p>Stock Items</p><h2 id="countStock">0</h2></div>
-<div class="card"><p>Production Records</p><h2 id="countProduction">0</h2></div>
-<div class="card"><p>Customers</p><h2 id="countCustomers">0</h2></div>
-<div class="card"><p>Total Orders</p><h2 id="countOrders">0</h2></div>
+
+<div class="card">
+<p>Total Employees</p>
+<h2 id="countEmployees">0</h2>
+</div>
+
+<div class="card">
+<p>Cable Products</p>
+<h2 id="countCables">0</h2>
+</div>
+
+<div class="card">
+<p>Stock Items</p>
+<h2 id="countStock">0</h2>
+</div>
+
+<div class="card">
+<p>Production Records</p>
+<h2 id="countProduction">0</h2>
+</div>
+
+<div class="card">
+<p>Customers</p>
+<h2 id="countCustomers">0</h2>
+</div>
+
+<div class="card">
+<p>Total Orders</p>
+<h2 id="countOrders">0</h2>
+</div>
+
 </div>
 
 <div class="panel">
+
 <h3>Factory Information</h3>
+
 <p>Manage employees, cable products, raw materials, production and sales from one place.</p>
+
 <p class="small">Your data is saved in this browser on this device.</p>
+
 </div>
+
 </section>
+
+<!-- EMPLOYEES -->
 
 <section id="employees">
+
 <h1>Employee Management</h1>
+
 <div class="panel">
+
 <h3>Add New Employee</h3>
+
 <form id="employeeForm">
-<div class="field"><label>Employee Name</label><input name="name" placeholder="Enter employee name" required></div>
-<div class="field"><label>Employee ID</label><input name="id" placeholder="Employee ID" required></div>
-<div class="field"><label>Mobile Number</label><input name="phone" placeholder="Mobile number"></div>
-<div class="field"><label>Job Role</label><input name="role" placeholder="e.g. Operator"></div>
-<div class="field"><label>Monthly Salary</label><input name="salary" type="number" min="0" placeholder="Salary"></div>
+
+<div class="field">
+<label>Employee Name</label>
+<input name="name" placeholder="Enter employee name" required>
+</div>
+
+<div class="field">
+<label>Employee ID</label>
+<input name="id" placeholder="Employee ID" required>
+</div>
+
+<div class="field">
+<label>Mobile Number</label>
+<input name="phone" placeholder="Mobile number">
+</div>
+
+<div class="field">
+<label>Job Role</label>
+<input name="role" placeholder="e.g. Operator">
+</div>
+
+<div class="field">
+<label>Monthly Salary</label>
+<input name="salary" type="number" min="0" placeholder="Salary">
+</div>
+
 <button class="action">+ Add Employee</button>
+
 </form>
 </div>
-<div class="panel"><h3>Employee List</h3><div id="employeeList"></div></div>
+
+<div class="panel">
+<h3>Employee List</h3>
+<div id="employeeList"></div>
+</div>
+
 </section>
+
+<!-- CABLE PRODUCTS -->
 
 <section id="cables">
+
 <h1>Cable Product Management</h1>
+
 <div class="panel">
+
 <h3>Add New Cable</h3>
+
 <form id="cableForm">
-<div class="field"><label>Cable Name</label><input name="name" placeholder="e.g. Copper Cable" required></div>
-<div class="field"><label>Cable Type</label><input name="type" placeholder="e.g. Power Cable"></div>
-<div class="field"><label>Size</label><input name="size" placeholder="e.g. 2.5 mm"></div>
-<div class="field"><label>Price Per Meter</label><input name="price" type="number" min="0" placeholder="Price"></div>
+
+<div class="field">
+<label>Cable Name</label>
+<input name="name" placeholder="e.g. Copper Cable" required>
+</div>
+
+<div class="field">
+<label>Cable Type</label>
+<input name="type" placeholder="e.g. Power Cable">
+</div>
+
+<div class="field">
+<label>Size</label>
+<input name="size" placeholder="e.g. 2.5 mm">
+</div>
+
+<div class="field">
+<label>Price Per Meter</label>
+<input name="price" type="number" min="0" placeholder="Price">
+</div>
+
 <button class="action">+ Add Cable</button>
+
 </form>
 </div>
-<div class="panel"><h3>Cable Products List</h3><div id="cableList"></div></div>
+
+<div class="panel">
+<h3>Cable Products List</h3>
+<div id="cableList"></div>
+</div>
+
 </section>
+
+<!-- STOCK -->
 
 <section id="stock">
+
 <h1>Raw Material & Stock</h1>
+
 <div class="panel">
+
 <h3>Add Stock Item</h3>
+
 <p class="small">Minimum quantity allowed: 20</p>
+
 <form id="stockForm">
-<div class="field"><label>Material Name</label><input name="name" placeholder="Copper / PVC / Aluminium" required></div>
-<div class="field"><label>Quantity (Minimum 20)</label><input name="quantity" type="number" min="20" step="1" placeholder="Enter at least 20" required></div>
-<div class="field"><label>Unit</label>
-<select name="unit"><option>Kg</option><option>Meter</option><option>Piece</option><option>Roll</option></select>
+
+<div class="field">
+<label>Material Name</label>
+<input name="name" placeholder="Copper / PVC / Aluminium" required>
 </div>
-<div class="field"><label>Minimum Stock</label><input name="minimum" type="number" min="0" placeholder="Minimum quantity"></div>
+
+<div class="field">
+<label>Quantity (Minimum 20)</label>
+<input name="quantity" type="number" min="20" step="1" placeholder="Enter at least 20" required>
+</div>
+
+<div class="field">
+<label>Unit</label>
+<select name="unit">
+<option>Kg</option>
+<option>Meter</option>
+<option>Piece</option>
+<option>Roll</option>
+</select>
+</div>
+
+<div class="field">
+<label>Minimum Stock</label>
+<input name="minimum" type="number" min="0" placeholder="Minimum quantity">
+</div>
+
 <button class="action">+ Add Stock</button>
+
 </form>
 </div>
-<div class="panel"><h3>Stock List</h3><div id="stockList"></div></div>
+
+<div class="panel">
+<h3>Stock List</h3>
+<div id="stockList"></div>
+</div>
+
 </section>
+
+<!-- PRODUCTION -->
 
 <section id="production">
+
 <h1>Production Management</h1>
+
 <div class="panel">
+
 <h3>Add Production Record</h3>
+
 <form id="productionForm">
-<div class="field"><label>Cable Name</label><input name="name" placeholder="Cable name" required></div>
-<div class="field"><label>Quantity (Meters)</label><input name="quantity" type="number" min="1" placeholder="Meters produced" required></div>
-<div class="field"><label>Production Date</label><input name="date" type="date" id="productionDate" required></div>
-<div class="field"><label>Shift</label>
-<select name="shift"><option>Morning</option><option>Evening</option><option>Night</option></select>
+
+<div class="field">
+<label>Cable Name</label>
+<input name="name" placeholder="Cable name" required>
 </div>
+
+<div class="field">
+<label>Quantity (Meters)</label>
+<input name="quantity" type="number" min="1" placeholder="Meters produced" required>
+</div>
+
+<div class="field">
+<label>Production Date</label>
+<input name="date" type="date" id="productionDate" required>
+</div>
+
+<div class="field">
+<label>Shift</label>
+<select name="shift">
+<option>Morning</option>
+<option>Evening</option>
+<option>Night</option>
+</select>
+</div>
+
 <button class="action">+ Add Production</button>
+
 </form>
 </div>
-<div class="panel"><h3>Production History</h3><div id="productionList"></div></div>
+
+<div class="panel">
+<h3>Production History</h3>
+<div id="productionList"></div>
+</div>
+
 </section>
+
+<!-- CUSTOMERS -->
 
 <section id="customers">
+
 <h1>Customer Management</h1>
+
 <div class="panel">
+
 <h3>Add Customer</h3>
+
 <form id="customerForm">
-<div class="field"><label>Customer Name</label><input name="name" placeholder="Customer name" required></div>
-<div class="field"><label>Mobile Number</label><input name="phone" type="tel" placeholder="Mobile number"></div>
-<div class="field"><label>Address</label><input name="address" placeholder="Customer address"></div>
+
+<div class="field">
+<label>Customer Name</label>
+<input name="name" placeholder="Customer name" required>
+</div>
+
+<div class="field">
+<label>Mobile Number</label>
+<input name="phone" type="tel" placeholder="Mobile number">
+</div>
+
+<div class="field">
+<label>Address</label>
+<input name="address" placeholder="Customer address">
+</div>
+
 <button class="action">+ Add Customer</button>
+
 </form>
 </div>
-<div class="panel"><h3>Customer List</h3><div id="customerList"></div></div>
+
+<div class="panel">
+<h3>Customer List</h3>
+<div id="customerList"></div>
+</div>
+
 </section>
 
+<!-- ORDERS -->
+
 <section id="orders">
+
 <h1>Order Management</h1>
+
 <div class="panel">
+
 <h3>Add New Order</h3>
+
 <form id="orderForm">
-<div class="field"><label>Customer Name</label><input name="customer" placeholder="Customer name" required></div>
-<div class="field"><label>Cable Name</label><input name="cable" placeholder="Cable name" required></div>
-<div class="field"><label>Quantity (Meters)</label><input name="quantity" type="number" min="1" placeholder="Quantity" required></div>
-<div class="field"><label>Total Amount</label><input name="amount" type="number" min="0" placeholder="Amount"></div>
-<div class="field"><label>Order Status</label>
-<select name="status"><option>Pending</option><option>Processing</option><option>Completed</option></select>
+
+<div class="field">
+<label>Customer Name</label>
+<input name="customer" placeholder="Customer name" required>
 </div>
+
+<div class="field">
+<label>Cable Name</label>
+<input name="cable" placeholder="Cable name" required>
+</div>
+
+<div class="field">
+<label>Quantity (Meters)</label>
+<input name="quantity" type="number" min="1" placeholder="Quantity" required>
+</div>
+
+<div class="field">
+<label>Total Amount</label>
+<input name="amount" type="number" min="0" placeholder="Amount">
+</div>
+
+<div class="field">
+<label>Order Status</label>
+<select name="status">
+<option>Pending</option>
+<option>Processing</option>
+<option>Completed</option>
+</select>
+</div>
+
 <button class="action">+ Add Order</button>
+
 </form>
 </div>
-<div class="panel"><h3>Order List</h3><div id="orderList"></div></div>
+
+<div class="panel">
+<h3>Order List</h3>
+<div id="orderList"></div>
+</div>
+
 </section>
 
 </main>
 </div>
 
 <script>
-const keys=['employees','cables','stock','production','customers','orders'];
+
+/* LOGIN SYSTEM */
+
+function login(event){
+
+event.preventDefault();
+
+const username=document.getElementById('username').value;
+const password=document.getElementById('password').value;
+
+if(username==='CABLE FACTORY' && password==='30112026'){
+
+document.getElementById('loginPage').style.display='none';
+
+document.getElementById('loginError').textContent='';
+
+document.getElementById('username').value='';
+document.getElementById('password').value='';
+
+}else{
+
+document.getElementById('loginError').textContent=
+'Invalid Username or Password!';
+
+}
+}
+
+/* LOGOUT SYSTEM */
+
+function logout(){
+
+if(confirm('Are you sure you want to logout?')){
+
+document.getElementById('loginPage').style.display='flex';
+
+showPage('dashboard',document.querySelector('nav button'));
+
+}
+
+}
+
+/* DATABASE */
+
+const keys=[
+'employees',
+'cables',
+'stock',
+'production',
+'customers',
+'orders'
+];
 
 const formIds={
 employees:'employeeForm',
@@ -234,184 +761,333 @@ orders:'orderList'
 let db={};
 
 const fields={
-employees:[['name','Name'],['id','ID'],['phone','Mobile'],['role','Role'],['salary','Salary']],
-cables:[['name','Cable Name'],['type','Type'],['size','Size'],['price','Price/Meter']],
-stock:[['name','Material'],['quantity','Quantity'],['unit','Unit'],['minimum','Minimum']],
-production:[['name','Cable'],['quantity','Meters'],['date','Date'],['shift','Shift']],
-customers:[['name','Customer'],['phone','Mobile'],['address','Address']],
-orders:[['customer','Customer'],['cable','Cable'],['quantity','Meters'],['amount','Amount'],['status','Status']]
+
+employees:[
+['name','Name'],
+['id','ID'],
+['phone','Mobile'],
+['role','Role'],
+['salary','Salary']
+],
+
+cables:[
+['name','Cable Name'],
+['type','Type'],
+['size','Size'],
+['price','Price/Meter']
+],
+
+stock:[
+['name','Material'],
+['quantity','Quantity'],
+['unit','Unit'],
+['minimum','Minimum']
+],
+
+production:[
+['name','Cable'],
+['quantity','Meters'],
+['date','Date'],
+['shift','Shift']
+],
+
+customers:[
+['name','Customer'],
+['phone','Mobile'],
+['address','Address']
+],
+
+orders:[
+['customer','Customer'],
+['cable','Cable'],
+['quantity','Meters'],
+['amount','Amount'],
+['status','Status']
+]
+
 };
 
+/* DATE */
+
 function getToday(){
+
 const d=new Date();
+
 const year=d.getFullYear();
 const month=String(d.getMonth()+1).padStart(2,'0');
 const day=String(d.getDate()).padStart(2,'0');
+
 return `${year}-${month}-${day}`;
+
 }
 
 function setProductionDateLimit(){
+
 const dateInput=document.getElementById('productionDate');
+
 dateInput.max=getToday();
+
 }
+
+/* LOAD DATA */
 
 function loadData(){
+
 keys.forEach(k=>{
+
 try{
+
 db[k]=JSON.parse(localStorage.getItem('factory_'+k))||[];
+
 if(!Array.isArray(db[k]))db[k]=[];
+
 }catch(e){
+
 db[k]=[];
+
 }
+
 });
+
 }
+
+/* SAVE DATA */
 
 function saveData(k){
+
 localStorage.setItem('factory_'+k,JSON.stringify(db[k]));
+
 updateDashboard();
+
 }
 
+/* ESCAPE HTML */
+
 function esc(v){
+
 return String(v??'').replace(/[&<>"']/g,c=>({
+
 '&':'&amp;',
 '<':'&lt;',
 '>':'&gt;',
 '"':'&quot;',
 "'":'&#39;'
+
 }[c]));
+
 }
+
+/* PAGE NAVIGATION */
 
 function showPage(id,btn){
+
 document.querySelectorAll('main section').forEach(s=>s.classList.remove('show'));
+
 document.getElementById(id).classList.add('show');
+
 document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+
 if(btn)btn.classList.add('active');
+
 }
 
+/* RENDER RECORDS */
+
 function render(k){
+
 const target=document.getElementById(listIds[k]);
+
 if(!target)return;
 
 if(!db[k].length){
+
 target.innerHTML='<p class="small">No records added yet.</p>';
+
 return;
+
 }
 
 let html='<div class="table-wrap"><table><thead><tr>';
 
 fields[k].forEach(f=>html+='<th>'+f[1]+'</th>');
+
 html+='<th>Action</th></tr></thead><tbody>';
 
 db[k].forEach((item,i)=>{
+
 html+='<tr>';
 
 fields[k].forEach(f=>{
+
 html+='<td>'+esc(item[f[0]])+'</td>';
+
 });
 
 html+='<td><button type="button" class="delete" onclick="removeItem(\''+k+'\','+i+')">Delete</button></td></tr>';
+
 });
 
 target.innerHTML=html+'</tbody></table></div>';
+
 }
+
+/* DELETE RECORD */
 
 function removeItem(k,i){
+
 if(confirm('Delete this record?')){
+
 db[k].splice(i,1);
+
 saveData(k);
+
 render(k);
+
 }
+
 }
+
+/* MOBILE VALIDATION */
 
 function normalizeMobile(number){
+
 return String(number||'').replace(/\D/g,'');
+
 }
 
-// CUSTOMER DUPLICATE MOBILE VALIDATION
 function checkDuplicateMobile(item){
+
 const newMobile=normalizeMobile(item.phone);
 
 if(!newMobile)return false;
 
 return db.customers.some(customer=>
+
 normalizeMobile(customer.phone)===newMobile
+
 );
+
 }
 
-// FORM SUBMISSION AND VALIDATION
+/* FORM SUBMISSION */
+
 keys.forEach(k=>{
+
 const form=document.getElementById(formIds[k]);
 
 form.addEventListener('submit',e=>{
+
 e.preventDefault();
 
 const item=Object.fromEntries(new FormData(form).entries());
 
-// 1. CUSTOMER MOBILE DUPLICATE CHECK
+/* CUSTOMER DUPLICATE CHECK */
+
 if(k==='customers'){
+
 if(checkDuplicateMobile(item)){
+
 alert('ERROR! This mobile number already exists. Please enter a different mobile number.');
+
 form.elements.phone.focus();
+
 return;
-}
+
 }
 
-// 2. PRODUCTION FUTURE DATE CHECK
+}
+
+/* PRODUCTION DATE CHECK */
+
 if(k==='production'){
+
 const today=getToday();
 
 if(!item.date){
+
 alert('ERROR! Please select production date.');
+
 return;
+
 }
 
 if(item.date>today){
+
 alert('ERROR! Future production date is not allowed. Please select today or a previous date.');
+
 form.elements.date.focus();
+
 return;
-}
+
 }
 
-// 3. STOCK MINIMUM 20 CHECK
+}
+
+/* STOCK MINIMUM CHECK */
+
 if(k==='stock'){
+
 const quantity=Number(item.quantity);
 
 if(!Number.isFinite(quantity)||quantity<20){
+
 alert('ERROR! Minimum stock quantity must be 20 or more. You cannot add stock below 20.');
+
 form.elements.quantity.focus();
+
 return;
-}
+
 }
 
-// SAVE RECORD ONLY AFTER ALL VALIDATIONS PASS
+}
+
+/* SAVE RECORD */
+
 db[k].push(item);
+
 saveData(k);
+
 render(k);
 
 form.reset();
 
 if(k==='production'){
+
 setProductionDateLimit();
+
 }
 
 alert('Record added successfully!');
-});
+
 });
 
-// UPDATE DASHBOARD COUNTERS
-function updateDashboard(){
-keys.forEach(k=>{
-const id='count'+k[0].toUpperCase()+k.slice(1);
-document.getElementById(id).textContent=db[k].length;
 });
+
+/* DASHBOARD COUNTERS */
+
+function updateDashboard(){
+
+keys.forEach(k=>{
+
+const id='count'+k[0].toUpperCase()+k.slice(1);
+
+document.getElementById(id).textContent=db[k].length;
+
+});
+
 }
 
-// START APPLICATION
+/* START APPLICATION */
+
 loadData();
+
 keys.forEach(render);
+
 updateDashboard();
+
 setProductionDateLimit();
 
 </script>
+
 </body>
 </html>
