@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cable Factory Management</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f1f4f9;color:#202b3c}
+header{background:#14243d;color:white;padding:22px}
+header h2{font-size:22px}
+header p{color:#bdc9dc;margin-top:7px}
+.layout{display:flex;min-height:90vh}
+aside{background:#14243d;color:white;width:210px;padding:20px 12px}
+aside h3{margin-bottom:20px;color:#8eb8ff}
+nav button{display:block;width:100%;padding:14px 10px;margin:5px 0;background:transparent;border:0;color:white;text-align:left;font-size:15px;border-radius:7px}
+nav button.active,nav button:hover{background:#29476e}
+main{flex:1;padding:22px;min-width:0}
+h1{font-size:25px;margin-bottom:8px}
+.sub{color:#718096;margin-bottom:22px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:white;padding:20px;border-radius:12px;box-shadow:0 2px 10px #dce2eb}
+.card p{color:#718096;font-size:14px}
+.card h2{font-size:27px;margin-top:12px;color:#2259a5}
+section{display:none}
+section.show{display:block}
+.panel{background:white;padding:20px;border-radius:12px;margin-top:20px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:400px}
+th,td{text-align:left;padding:13px;border-bottom:1px solid #e5e9ef}
+th{color:#52647b}
+.status{color:#14834d;font-weight:bold}
+.action{background:#2463b8;color:white;border:0;padding:11px 16px;border-radius:7px;margin-top:15px}
+footer{text-align:center;color:#8190a5;padding:20px;font-size:13px}
+@media(max-width:600px){
+.layout{display:block}
+aside{width:100%;padding:10px}
+nav{display:flex;overflow-x:auto;gap:5px}
+nav button{white-space:nowrap;width:auto;font-size:13px}
+main{padding:15px}
+}
+</style>
+</head>
+<body>
+<header>
+<h2>🏭 CABLE FACTORY</h2>
+<p>Factory Management System | Admin Dashboard</p>
+</header>
+<div class="layout">
+<aside>
+<h3>MAIN MENU</h3>
+<nav>
+<button class="active" onclick="showPage('dashboard',this)">📊 Dashboard</button>
+<button onclick="showPage('employees',this)">👨‍🏭 Employees</button>
+<button onclick="showPage('materials',this)">📦 Raw Materials</button>
+<button onclick="showPage('production',this)">⚙️ Production</button>
+<button onclick="showPage('stock',this)">🏬 Stock</button>
+<button onclick="showPage('sales',this)">💰 Sales</button>
+</nav>
+</aside>
+<main>
+<section id="dashboard" class="show">
+<h1>Dashboard</h1>
+<p class="sub">Welcome to Cable Factory Management System</p>
+<div class="cards">
+<div class="card"><p>Total Employees</p><h2>45</h2></div>
+<div class="card"><p>Raw Materials</p><h2>1200 KG</h2></div>
+<div class="card"><p>Total Production</p><h2>8500 M</h2></div>
+<div class="card"><p>Available Stock</p><h2>6200 M</h2></div>
+</div>
+<div class="panel">
+<h3>Recent Production</h3>
+<table>
+<tr><th>Product</th><th>Quantity</th><th>Status</th></tr>
+<tr><td>Copper Cable</td><td>2500 M</td><td class="status">Completed</td></tr>
+<tr><td>PVC Wire</td><td>3000 M</td><td class="status">Completed</td></tr>
+<tr><td>Power Cable</td><td>3000 M</td><td class="status">Processing</td></tr>
+</table>
+</div>
+</section>
+<section id="employees">
+<h1>Employee Management</h1>
+<p class="sub">Manage factory employees</p>
+<div class="panel">
+<h3>Employee Details</h3>
+<table>
+<tr><th>Name</th><th>Department</th><th>Status</th></tr>
+<tr><td>Rahul Patel</td><td>Production</td><td class="status">Active</td></tr>
+<tr><td>Amit Shah</td><td>Quality</td><td class="status">Active</td></tr>
+<tr><td>Vijay Parmar</td><td>Warehouse</td><td class="status">Active</td></tr>
+</table>
+</div>
+</section>
+<section id="materials">
+<h1>Raw Material Management</h1>
+<p class="sub">Manage factory raw materials</p>
+<div class="panel">
+<table>
+<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>
+<tr><td>Copper</td><td>500</td><td>KG</td></tr>
+<tr><td>PVC</td><td>400</td><td>KG</td></tr>
+<tr><td>Aluminium</td><td>300</td><td>KG</td></tr>
+</table>
+</div>
+</section>
+<section id="production">
+<h1>Production Management</h1>
+<p class="sub">Factory production details</p>
+<div class="panel">
+<table>
+<tr><th>Product</th><th>Quantity</th><th>Status</th></tr>
+<tr><td>Copper Cable</td><td>2500 M</td><td class="status">Completed</td></tr>
+<tr><td>PVC Wire</td><td>3000 M</td><td class="status">Completed</td></tr>
+<tr><td>Power Cable</td><td>3000 M</td><td class="status">Processing</td></tr>
+</table>
+</div>
+</section>
+<section id="stock">
+<h1>Stock Management</h1>
+<p class="sub">Available finished products</p>
+<div class="panel">
+<table>
+<tr><th>Product</th><th>Available Stock</th></tr>
+<tr><td>Copper Cable</td><td>2000 M</td></tr>
+<tr><td>PVC Wire</td><td>2500 M</td></tr>
+<tr><td>Power Cable</td><td>1700 M</td></tr>
+</table>
+</div>
+</section>
+<section id="sales">
+<h1>Sales Management</h1>
+<p class="sub">Factory sales records</p>
+<div class="panel">
+<table>
+<tr><th>Product</th><th>Quantity Sold</th><th>Amount</th></tr>
+<tr><td>Copper Cable</td><td>500 M</td><td>₹25,000</td></tr>
+<tr><td>PVC Wire</td><td>300 M</td><td>₹12,000</td></tr>
+<tr><td>Power Cable</td><td>200 M</td><td>₹18,000</td></tr>
+</table>
+</div>
+</section>
+</main>
+</div>
+<footer>© 2026 Cable Factory Management System | College Project</footer>
+<script>
+function showPage(id,btn){
+document.querySelectorAll('main section').forEach(s=>s.classList.remove('show'));
+document.getElementById(id).classList.add('show');
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+}
+</script>
+</body>
+</html>
