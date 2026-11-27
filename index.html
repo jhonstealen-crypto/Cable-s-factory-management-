@@ -1,183 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cable Factory Management System</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f1f5f9;color:#172033}
-header{background:#14243d;color:white;padding:20px}
-header h2{margin:0 0 7px}
-header p{margin:0;color:#bdc9dc}
-.layout{display:flex;min-height:90vh}
-aside{width:220px;background:#14243d;padding:15px;color:white}
-aside h3{color:#8eb8ff}
-nav button{display:block;width:100%;padding:13px;margin:5px 0;border:0;border-radius:6px;text-align:left;background:transparent;color:white;font-size:15px}
-nav button.active,nav button:hover{background:#304b70}
-main{flex:1;padding:22px;min-width:0}
-h1{font-size:25px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px}
-.card,.panel{background:white;padding:18px;border-radius:10px;box-shadow:0 2px 8px #0001;margin-bottom:16px}
-.card p{color:#718096;margin:8px 0}
-.card h2{font-size:28px;margin:10px 0;color:#1765ad}
-section{display:none}
-section.show{display:block}
-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}
-input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:6px;font-size:15px}
-label{font-size:13px;font-weight:bold}
-.field{display:flex;flex-direction:column;gap:6px}
-button.action{background:#1765ad;color:white;padding:12px 18px;border:0;border-radius:6px;font-weight:bold}
-button.delete{background:#dc3545;color:white;border:0;border-radius:5px;padding:7px 10px}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;background:white;min-width:550px}
-th,td{text-align:left;padding:12px;border-bottom:1px solid #e2e8f0}
-th{background:#eaf1fa;color:#28466b}
-.small{font-size:13px;color:#64748b}
-@media(max-width:650px){
-.layout{display:block}
-aside{width:100%;padding:10px}
-nav{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
-nav button{font-size:13px;padding:10px}
-main{padding:13px}
-}
-</style>
-</head>
-<body>
-
-<header>
-<h2>🏭 Cable Factory Management</h2>
-<p>Factory Management System | Admin Dashboard</p>
-</header>
-
-<div class="layout">
-<aside>
-<h3>MAIN MENU</h3>
-<nav id="menu">
-<button class="active" onclick="showPage('dashboard',this)">📊 Dashboard</button>
-<button onclick="showPage('employees',this)">👨‍🏭 Employees</button>
-<button onclick="showPage('cables',this)">🔌 Cable Products</button>
-<button onclick="showPage('stock',this)">📦 Stock</button>
-<button onclick="showPage('production',this)">⚙️ Production</button>
-<button onclick="showPage('customers',this)">👥 Customers</button>
-<button onclick="showPage('orders',this)">📝 Orders</button>
-</nav>
-</aside>
-
-<main>
-
-<section id="dashboard" class="show">
-<h1>Dashboard</h1>
-<p class="small">Welcome to Cable Factory Management System</p>
-<div class="cards">
-<div class="card"><p>Total Employees</p><h2 id="countEmployees">0</h2></div>
-<div class="card"><p>Cable Products</p><h2 id="countCables">0</h2></div>
-<div class="card"><p>Stock Items</p><h2 id="countStock">0</h2></div>
-<div class="card"><p>Production Records</p><h2 id="countProduction">0</h2></div>
-<div class="card"><p>Customers</p><h2 id="countCustomers">0</h2></div>
-<div class="card"><p>Total Orders</p><h2 id="countOrders">0</h2></div>
-</div>
-<div class="panel">
-<h3>Factory Information</h3>
-<p>Manage employees, cable products, raw materials, production and sales from one place.</p>
-<p class="small">Your data is saved in this browser on this device.</p>
-</div>
-</section>
-
-<section id="employees">
-<h1>Employee Management</h1>
-<div class="panel">
-<h3>Add New Employee</h3>
-<form id="employeeForm">
-<div class="field"><label>Employee Name</label><input name="name" placeholder="Enter employee name" required></div>
-<div class="field"><label>Employee ID</label><input name="id" placeholder="Employee ID" required></div>
-<div class="field"><label>Mobile Number</label><input name="phone" placeholder="Mobile number"></div>
-<div class="field"><label>Job Role</label><input name="role" placeholder="e.g. Operator"></div>
-<div class="field"><label>Monthly Salary</label><input name="salary" type="number" min="0" placeholder="Salary"></div>
-<button type="submit" class="action">+ Add Employee</button>
-</form>
-</div>
-<div class="panel"><h3>Employee List</h3><div id="employeeList"></div></div>
-</section>
-
-<section id="cables">
-<h1>Cable Product Management</h1>
-<div class="panel">
-<h3>Add New Cable</h3>
-<form id="cableForm">
-<div class="field"><label>Cable Name</label><input name="name" placeholder="e.g. Copper Cable" required></div>
-<div class="field"><label>Cable Type</label><input name="type" placeholder="e.g. Power Cable"></div>
-<div class="field"><label>Size</label><input name="size" placeholder="e.g. 2.5 mm"></div>
-<div class="field"><label>Price Per Meter</label><input name="price" type="number" min="0" placeholder="Price"></div>
-<button type="submit" class="action">+ Add Cable</button>
-</form>
-</div>
-<div class="panel"><h3>Cable Products List</h3><div id="cableList"></div></div>
-</section>
-
-<section id="stock">
-<h1>Raw Material & Stock</h1>
-<div class="panel">
-<h3>Add Stock Item</h3>
-<form id="stockForm">
-<div class="field"><label>Material Name</label><input name="name" placeholder="Copper / PVC / Aluminium" required></div>
-<div class="field"><label>Quantity</label><input name="quantity" type="number" min="0" placeholder="Quantity" required></div>
-<div class="field"><label>Unit</label><select name="unit"><option>Kg</option><option>Meter</option><option>Piece</option><option>Roll</option></select></div>
-<div class="field"><label>Minimum Stock</label><input name="minimum" type="number" min="0" placeholder="Minimum quantity"></div>
-<button type="submit" class="action">+ Add Stock</button>
-</form>
-</div>
-<div class="panel"><h3>Stock List</h3><div id="stockList"></div></div>
-</section>
-
-<section id="production">
-<h1>Production Management</h1>
-<div class="panel">
-<h3>Add Production Record</h3>
-<form id="productionForm">
-<div class="field"><label>Cable Name</label><input name="name" placeholder="Cable name" required></div>
-<div class="field"><label>Quantity (Meters)</label><input name="quantity" type="number" min="0" placeholder="Meters produced" required></div>
-<div class="field"><label>Production Date</label><input name="date" type="date" required></div>
-<div class="field"><label>Shift</label><select name="shift"><option>Morning</option><option>Evening</option><option>Night</option></select></div>
-<button type="submit" class="action">+ Add Production</button>
-</form>
-</div>
-<div class="panel"><h3>Production History</h3><div id="productionList"></div></div>
-</section>
-
-<section id="customers">
-<h1>Customer Management</h1>
-<div class="panel">
-<h3>Add Customer</h3>
-<form id="customerForm">
-<div class="field"><label>Customer Name</label><input name="name" placeholder="Customer name" required></div>
-<div class="field"><label>Mobile Number</label><input name="phone" placeholder="Mobile number"></div>
-<div class="field"><label>Address</label><input name="address" placeholder="Customer address"></div>
-<button type="submit" class="action">+ Add Customer</button>
-</form>
-</div>
-<div class="panel"><h3>Customer List</h3><div id="customerList"></div></div>
-</section>
-
-<section id="orders">
-<h1>Order Management</h1>
-<div class="panel">
-<h3>Add New Order</h3>
-<form id="orderForm">
-<div class="field"><label>Customer Name</label><input name="customer" placeholder="Customer name" required></div>
-<div class="field"><label>Cable Name</label><input name="cable" placeholder="Cable name" required></div>
-<div class="field"><label>Quantity (Meters)</label><input name="quantity" type="number" min="1" placeholder="Quantity" required></div>
-<div class="field"><label>Total Amount</label><input name="amount" type="number" min="0" placeholder="Amount"></div>
-<div class="field"><label>Order Status</label><select name="status"><option>Pending</option><option>Processing</option><option>Completed</option></select></div>
-<button type="submit" class="action">+ Add Order</button>
-</form>
-</div>
-<div class="panel"><h3>Order List</h3><div id="orderList"></div></div>
-</section>
-
-</main>
-</div>
-
 <script>
 const keys=['employees','cables','stock','production','customers','orders'];
 
@@ -201,6 +21,14 @@ const listIds={
 
 let db={};
 
+function todayDate(){
+ const d=new Date();
+ const y=d.getFullYear();
+ const m=String(d.getMonth()+1).padStart(2,'0');
+ const day=String(d.getDate()).padStart(2,'0');
+ return `${y}-${m}-${day}`;
+}
+
 function loadData(){
  keys.forEach(k=>{
   try{
@@ -217,8 +45,10 @@ function saveData(k){
  try{
   localStorage.setItem('factory_'+k,JSON.stringify(db[k]));
   updateDashboard();
+  return true;
  }catch(e){
-  alert('Unable to save data. Please check browser storage.');
+  alert('Unable to save data!');
+  return false;
  }
 }
 
@@ -274,8 +104,7 @@ function render(k){
 function removeItem(k,i){
  if(confirm('Delete this record?')){
   db[k].splice(i,1);
-  saveData(k);
-  render(k);
+  if(saveData(k))render(k);
  }
 }
 
@@ -287,10 +116,11 @@ function updateDashboard(){
  });
 }
 
-// Load saved data before attaching form events
-loadData();
+// Set maximum production date to today
+const productionDate=document.querySelector('#productionForm input[name="date"]');
+productionDate.max=todayDate();
 
-// Attach form submission events
+// Form submission and validations
 keys.forEach(k=>{
  const form=document.getElementById(formIds[k]);
 
@@ -304,8 +134,46 @@ keys.forEach(k=>{
 
   const item=Object.fromEntries(new FormData(form).entries());
 
+  // 1. Production date validation
+  if(k==='production'){
+   if(item.date>todayDate()){
+    alert('ERROR: Future date is not allowed!');
+    return;
+   }
+  }
+
+  // 2. Duplicate customer mobile validation
+  if(k==='customers'){
+   const mobile=(item.phone||'').replace(/\D/g,'');
+
+   if(mobile){
+    const duplicate=db.customers.some(customer=>
+     (customer.phone||'').replace(/\D/g,'')===mobile
+    );
+
+    if(duplicate){
+     alert('ERROR: Mobile number already exists!');
+     return;
+    }
+   }
+  }
+
+  // 3. Minimum stock validation
+  if(k==='stock'){
+   if(Number(item.quantity)<20){
+    alert('ERROR: Minimum stock quantity must be 20!');
+    return;
+   }
+  }
+
+  // Save valid record
   db[k].push(item);
-  saveData(k);
+
+  if(!saveData(k)){
+   db[k].pop();
+   return;
+  }
+
   render(k);
   form.reset();
 
@@ -313,10 +181,8 @@ keys.forEach(k=>{
  });
 });
 
-// Display all saved records
+// Load and display existing records
+loadData();
 keys.forEach(render);
 updateDashboard();
-
-</script>
-</body>
-</html>
+           </script>
