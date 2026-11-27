@@ -1,154 +1,252 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cable Factory Management</title>
+<title>Cable Factory Management System</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#f1f4f9;color:#202b3c}
-header{background:#14243d;color:white;padding:22px}
-header h2{font-size:22px}
-header p{color:#bdc9dc;margin-top:7px}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f1f5f9;color:#172033}
+header{background:#14243d;color:white;padding:20px}
+header h2{margin:0 0 7px}
+header p{margin:0;color:#bdc9dc}
 .layout{display:flex;min-height:90vh}
-aside{background:#14243d;color:white;width:210px;padding:20px 12px}
-aside h3{margin-bottom:20px;color:#8eb8ff}
-nav button{display:block;width:100%;padding:14px 10px;margin:5px 0;background:transparent;border:0;color:white;text-align:left;font-size:15px;border-radius:7px}
-nav button.active,nav button:hover{background:#29476e}
+aside{width:220px;background:#14243d;padding:15px;color:white}
+aside h3{color:#8eb8ff}
+nav button{display:block;width:100%;padding:13px;margin:5px 0;border:0;border-radius:6px;text-align:left;background:transparent;color:white;font-size:15px}
+nav button.active,nav button:hover{background:#304b70}
 main{flex:1;padding:22px;min-width:0}
-h1{font-size:25px;margin-bottom:8px}
-.sub{color:#718096;margin-bottom:22px}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.card{background:white;padding:20px;border-radius:12px;box-shadow:0 2px 10px #dce2eb}
-.card p{color:#718096;font-size:14px}
-.card h2{font-size:27px;margin-top:12px;color:#2259a5}
+h1{font-size:25px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px}
+.card,.panel{background:white;padding:18px;border-radius:10px;box-shadow:0 2px 8px #0001;margin-bottom:16px}
+.card p{color:#718096;margin:8px 0}
+.card h2{font-size:28px;margin:10px 0;color:#1765ad}
 section{display:none}
 section.show{display:block}
-.panel{background:white;padding:20px;border-radius:12px;margin-top:20px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:400px}
-th,td{text-align:left;padding:13px;border-bottom:1px solid #e5e9ef}
-th{color:#52647b}
-.status{color:#14834d;font-weight:bold}
-.action{background:#2463b8;color:white;border:0;padding:11px 16px;border-radius:7px;margin-top:15px}
-footer{text-align:center;color:#8190a5;padding:20px;font-size:13px}
-@media(max-width:600px){
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}
+input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:6px;font-size:15px}
+label{font-size:13px;font-weight:bold}
+.field{display:flex;flex-direction:column;gap:6px}
+button.action{background:#1765ad;color:white;padding:12px 18px;border:0;border-radius:6px;font-weight:bold}
+button.delete{background:#dc3545;color:white;border:0;border-radius:5px;padding:7px 10px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:white;min-width:550px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid #e2e8f0}
+th{background:#eaf1fa;color:#28466b}
+.small{font-size:13px;color:#64748b}
+@media(max-width:650px){
 .layout{display:block}
 aside{width:100%;padding:10px}
-nav{display:flex;overflow-x:auto;gap:5px}
-nav button{white-space:nowrap;width:auto;font-size:13px}
-main{padding:15px}
+nav{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
+nav button{font-size:13px;padding:10px}
+main{padding:13px}
 }
 </style>
 </head>
 <body>
 <header>
-<h2>🏭 CABLE FACTORY</h2>
+<h2>🏭 Cable Factory Management</h2>
 <p>Factory Management System | Admin Dashboard</p>
 </header>
+
 <div class="layout">
 <aside>
 <h3>MAIN MENU</h3>
-<nav>
+<nav id="menu">
 <button class="active" onclick="showPage('dashboard',this)">📊 Dashboard</button>
 <button onclick="showPage('employees',this)">👨‍🏭 Employees</button>
-<button onclick="showPage('materials',this)">📦 Raw Materials</button>
+<button onclick="showPage('cables',this)">🔌 Cable Products</button>
+<button onclick="showPage('stock',this)">📦 Stock</button>
 <button onclick="showPage('production',this)">⚙️ Production</button>
-<button onclick="showPage('stock',this)">🏬 Stock</button>
-<button onclick="showPage('sales',this)">💰 Sales</button>
+<button onclick="showPage('customers',this)">👥 Customers</button>
+<button onclick="showPage('orders',this)">📝 Orders</button>
 </nav>
 </aside>
+
 <main>
 <section id="dashboard" class="show">
 <h1>Dashboard</h1>
-<p class="sub">Welcome to Cable Factory Management System</p>
+<p class="small">Welcome to Cable Factory Management System</p>
 <div class="cards">
-<div class="card"><p>Total Employees</p><h2>45</h2></div>
-<div class="card"><p>Raw Materials</p><h2>1200 KG</h2></div>
-<div class="card"><p>Total Production</p><h2>8500 M</h2></div>
-<div class="card"><p>Available Stock</p><h2>6200 M</h2></div>
+<div class="card"><p>Total Employees</p><h2 id="countEmployees">0</h2></div>
+<div class="card"><p>Cable Products</p><h2 id="countCables">0</h2></div>
+<div class="card"><p>Stock Items</p><h2 id="countStock">0</h2></div>
+<div class="card"><p>Production Records</p><h2 id="countProduction">0</h2></div>
+<div class="card"><p>Customers</p><h2 id="countCustomers">0</h2></div>
+<div class="card"><p>Total Orders</p><h2 id="countOrders">0</h2></div>
 </div>
 <div class="panel">
-<h3>Recent Production</h3>
-<table>
-<tr><th>Product</th><th>Quantity</th><th>Status</th></tr>
-<tr><td>Copper Cable</td><td>2500 M</td><td class="status">Completed</td></tr>
-<tr><td>PVC Wire</td><td>3000 M</td><td class="status">Completed</td></tr>
-<tr><td>Power Cable</td><td>3000 M</td><td class="status">Processing</td></tr>
-</table>
+<h3>Factory Information</h3>
+<p>Manage employees, cable products, raw materials, production and sales from one place.</p>
+<p class="small">Your data is saved in this browser on this device.</p>
 </div>
 </section>
+
 <section id="employees">
 <h1>Employee Management</h1>
-<p class="sub">Manage factory employees</p>
 <div class="panel">
-<h3>Employee Details</h3>
-<table>
-<tr><th>Name</th><th>Department</th><th>Status</th></tr>
-<tr><td>Rahul Patel</td><td>Production</td><td class="status">Active</td></tr>
-<tr><td>Amit Shah</td><td>Quality</td><td class="status">Active</td></tr>
-<tr><td>Vijay Parmar</td><td>Warehouse</td><td class="status">Active</td></tr>
-</table>
+<h3>Add New Employee</h3>
+<form id="employeeForm">
+<div class="field"><label>Employee Name</label><input name="name" placeholder="Enter employee name" required></div>
+<div class="field"><label>Employee ID</label><input name="id" placeholder="Employee ID" required></div>
+<div class="field"><label>Mobile Number</label><input name="phone" placeholder="Mobile number"></div>
+<div class="field"><label>Job Role</label><input name="role" placeholder="e.g. Operator"></div>
+<div class="field"><label>Monthly Salary</label><input name="salary" type="number" min="0" placeholder="Salary"></div>
+<button class="action">+ Add Employee</button>
+</form>
 </div>
+<div class="panel"><h3>Employee List</h3><div id="employeeList"></div></div>
 </section>
-<section id="materials">
-<h1>Raw Material Management</h1>
-<p class="sub">Manage factory raw materials</p>
+
+<section id="cables">
+<h1>Cable Product Management</h1>
 <div class="panel">
-<table>
-<tr><th>Material</th><th>Quantity</th><th>Unit</th></tr>
-<tr><td>Copper</td><td>500</td><td>KG</td></tr>
-<tr><td>PVC</td><td>400</td><td>KG</td></tr>
-<tr><td>Aluminium</td><td>300</td><td>KG</td></tr>
-</table>
+<h3>Add New Cable</h3>
+<form id="cableForm">
+<div class="field"><label>Cable Name</label><input name="name" placeholder="e.g. Copper Cable" required></div>
+<div class="field"><label>Cable Type</label><input name="type" placeholder="e.g. Power Cable"></div>
+<div class="field"><label>Size</label><input name="size" placeholder="e.g. 2.5 mm"></div>
+<div class="field"><label>Price Per Meter</label><input name="price" type="number" min="0" placeholder="Price"></div>
+<button class="action">+ Add Cable</button>
+</form>
 </div>
+<div class="panel"><h3>Cable Products List</h3><div id="cableList"></div></div>
 </section>
+
+<section id="stock">
+<h1>Raw Material & Stock</h1>
+<div class="panel">
+<h3>Add Stock Item</h3>
+<form id="stockForm">
+<div class="field"><label>Material Name</label><input name="name" placeholder="Copper / PVC / Aluminium" required></div>
+<div class="field"><label>Quantity</label><input name="quantity" type="number" min="0" placeholder="Quantity" required></div>
+<div class="field"><label>Unit</label><select name="unit"><option>Kg</option><option>Meter</option><option>Piece</option><option>Roll</option></select></div>
+<div class="field"><label>Minimum Stock</label><input name="minimum" type="number" min="0" placeholder="Minimum quantity"></div>
+<button class="action">+ Add Stock</button>
+</form>
+</div>
+<div class="panel"><h3>Stock List</h3><div id="stockList"></div></div>
+</section>
+
 <section id="production">
 <h1>Production Management</h1>
-<p class="sub">Factory production details</p>
 <div class="panel">
-<table>
-<tr><th>Product</th><th>Quantity</th><th>Status</th></tr>
-<tr><td>Copper Cable</td><td>2500 M</td><td class="status">Completed</td></tr>
-<tr><td>PVC Wire</td><td>3000 M</td><td class="status">Completed</td></tr>
-<tr><td>Power Cable</td><td>3000 M</td><td class="status">Processing</td></tr>
-</table>
+<h3>Add Production Record</h3>
+<form id="productionForm">
+<div class="field"><label>Cable Name</label><input name="name" placeholder="Cable name" required></div>
+<div class="field"><label>Quantity (Meters)</label><input name="quantity" type="number" min="0" placeholder="Meters produced" required></div>
+<div class="field"><label>Production Date</label><input name="date" type="date" required></div>
+<div class="field"><label>Shift</label><select name="shift"><option>Morning</option><option>Evening</option><option>Night</option></select></div>
+<button class="action">+ Add Production</button>
+</form>
 </div>
+<div class="panel"><h3>Production History</h3><div id="productionList"></div></div>
 </section>
-<section id="stock">
-<h1>Stock Management</h1>
-<p class="sub">Available finished products</p>
+
+<section id="customers">
+<h1>Customer Management</h1>
 <div class="panel">
-<table>
-<tr><th>Product</th><th>Available Stock</th></tr>
-<tr><td>Copper Cable</td><td>2000 M</td></tr>
-<tr><td>PVC Wire</td><td>2500 M</td></tr>
-<tr><td>Power Cable</td><td>1700 M</td></tr>
-</table>
+<h3>Add Customer</h3>
+<form id="customerForm">
+<div class="field"><label>Customer Name</label><input name="name" placeholder="Customer name" required></div>
+<div class="field"><label>Mobile Number</label><input name="phone" placeholder="Mobile number"></div>
+<div class="field"><label>Address</label><input name="address" placeholder="Customer address"></div>
+<button class="action">+ Add Customer</button>
+</form>
 </div>
+<div class="panel"><h3>Customer List</h3><div id="customerList"></div></div>
 </section>
-<section id="sales">
-<h1>Sales Management</h1>
-<p class="sub">Factory sales records</p>
+
+<section id="orders">
+<h1>Order Management</h1>
 <div class="panel">
-<table>
-<tr><th>Product</th><th>Quantity Sold</th><th>Amount</th></tr>
-<tr><td>Copper Cable</td><td>500 M</td><td>₹25,000</td></tr>
-<tr><td>PVC Wire</td><td>300 M</td><td>₹12,000</td></tr>
-<tr><td>Power Cable</td><td>200 M</td><td>₹18,000</td></tr>
-</table>
+<h3>Add New Order</h3>
+<form id="orderForm">
+<div class="field"><label>Customer Name</label><input name="customer" placeholder="Customer name" required></div>
+<div class="field"><label>Cable Name</label><input name="cable" placeholder="Cable name" required></div>
+<div class="field"><label>Quantity (Meters)</label><input name="quantity" type="number" min="1" placeholder="Quantity" required></div>
+<div class="field"><label>Total Amount</label><input name="amount" type="number" min="0" placeholder="Amount"></div>
+<div class="field"><label>Order Status</label><select name="status"><option>Pending</option><option>Processing</option><option>Completed</option></select></div>
+<button class="action">+ Add Order</button>
+</form>
 </div>
+<div class="panel"><h3>Order List</h3><div id="orderList"></div></div>
 </section>
 </main>
 </div>
-<footer>© 2026 Cable Factory Management System | College Project</footer>
+
 <script>
-function showPage(id,btn){
-document.querySelectorAll('main section').forEach(s=>s.classList.remove('show'));
-document.getElementById(id).classList.add('show');
-document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
+const keys=['employees','cables','stock','production','customers','orders'];
+let db={};
+
+function loadData(){
+ keys.forEach(k=>{
+  try{db[k]=JSON.parse(localStorage.getItem('factory_'+k))||[]}
+  catch(e){db[k]=[]}
+ });
 }
+function saveData(k){
+ localStorage.setItem('factory_'+k,JSON.stringify(db[k]));
+ updateDashboard();
+}
+function esc(v){
+ return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function showPage(id,btn){
+ document.querySelectorAll('main section').forEach(s=>s.classList.remove('show'));
+ document.getElementById(id).classList.add('show');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ if(btn)btn.classList.add('active');
+}
+const fields={
+ employees:[['name','Name'],['id','ID'],['phone','Mobile'],['role','Role'],['salary','Salary']],
+ cables:[['name','Cable Name'],['type','Type'],['size','Size'],['price','Price/Meter']],
+ stock:[['name','Material'],['quantity','Quantity'],['unit','Unit'],['minimum','Minimum']],
+ production:[['name','Cable'],['quantity','Meters'],['date','Date'],['shift','Shift']],
+ customers:[['name','Customer'],['phone','Mobile'],['address','Address']],
+ orders:[['customer','Customer'],['cable','Cable'],['quantity','Meters'],['amount','Amount'],['status','Status']]
+};
+function render(k){
+ const target=document.getElementById(k.slice(0,-1)+'List');
+ if(!target)return;
+ if(!db[k].length){target.innerHTML='<p class="small">No records added yet.</p>';return}
+ let html='<div class="table-wrap"><table><thead><tr>';
+ fields[k].forEach(f=>html+='<th>'+f[1]+'</th>');
+ html+='<th>Action</th></tr></thead><tbody>';
+ db[k].forEach((item,i)=>{
+  html+='<tr>';
+  fields[k].forEach(f=>html+='<td>'+esc(item[f[0]])+'</td>');
+  html+='<td><button class="delete" onclick="removeItem(\''+k+'\','+i+')">Delete</button></td></tr>';
+ });
+ target.innerHTML=html+'</tbody></table></div>';
+}
+function removeItem(k,i){
+ if(confirm('Delete this record?')){
+  db[k].splice(i,1);
+  saveData(k);render(k);
+ }
+}
+keys.forEach(k=>{
+ const form=document.getElementById(k.slice(0,-1)+'Form');
+ form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const item=Object.fromEntries(new FormData(form).entries());
+  db[k].push(item);
+  saveData(k);
+  render(k);
+  form.reset();
+  alert('Record added successfully!');
+ });
+});
+function updateDashboard(){
+ keys.forEach(k=>{
+  const id='count'+k[0].toUpperCase()+k.slice(1);
+  document.getElementById(id).textContent=db[k].length;
+ });
+}
+loadData();
+keys.forEach(render);
+updateDashboard();
 </script>
 </body>
-</html>
+                                               </html>
